@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-md-6 d-grid gap-2 col-6 mx-auto text-center ">
+    <div class="row rounded border border-dark">
+        <h3 class="text-center p-3"> Completed Task Task </h3>
+        <p class="text-center">Did you finished this task?: {{todo.todo}}</p>
+        <form method="post" class="my-class d-flex flex-column mb-3 p-1" action=''>
+            {% csrf_token %}
+          {{ form.statu|crispy }}
+            <button type="submit"  class="button d-grid gap-2 col-6 mx-auto">Completed </button>
+        </form>
+        
+        
+        <hr>
+</div>
+</div>
+
+{% endblock content %}

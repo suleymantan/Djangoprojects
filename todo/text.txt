@@ -1,0 +1,29 @@
+ <div class="form-group">
+                   <label for="todo">Task</label>
+                   <input id="todo" type="text" name="todo" class='form-control input-lg border border-dark'>
+                   </div>
+                   <hr>
+                   
+                   <label for="commence">Select Start Date: </label>
+                   <div id="commence" 
+                        class="input-group date" 
+                        data-date-format="mm-dd-yyyy">
+                    <input class="form-control  border border-dark" 
+                    type="text" readonly />
+                    <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                    </div>
+                
+                <hr>
+                
+                    <label for="fin">Select Finish Date: </label>
+                   <div id="fin" 
+                        class="input-group date" 
+                        data-date-format="mm-dd-yyyy">
+                    <input class="form-control  border border-dark" 
+                    type="text" readonly />
+                    <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                    </div>
