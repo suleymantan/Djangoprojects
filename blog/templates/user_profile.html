@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container ">
+    <row class=''>
+    </br>
+      <div class='col-md-8 offset-md-2 p-3 border'>
+      </br>
+      <h1 class="">Friends</h1>
+      {% for user in users %}
+      <div class="d-flex flex-row mb-3 justify-content-between">
+        <div class="p-2">
+          <div class=" rounded-circle">
+            try
+          </div>
+        </div>
+        <div class="p-2">{{user.get_full_name}}</div>
+        <div class="p-2"><button type="button" class="btn btn-outline-primary">Add List</button></div>
+        <div class="p-2"><button type="button" class="btn btn-outline-primary">Blocked</button></div>
+      </div>
+        {%endfor %}
+      
+      
+  </div>
+  </row>
+  </div>
+
+{% endblock content %}
+
+{% block contentright %}
+
+{% endblock contentright %}

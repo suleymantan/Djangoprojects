@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid border">
+    <row>
+        <div class="col-md-12 p-3">
+            {% if user %}
+            <div class="card-header d-flex flex-row">
+                <a href="{% url 'index' %}" >
+                <div class="text-center border" style="border-radius:50%; !important;">
+                    <img src="{% static "images/logo.png" %}" class="rounded " alt="..." style='height:100px; width:100px; border-radius:50%; !important;'>
+                </div>
+            </a>
+               <a href="{% url 'profile' user.pk  %}" > <p class="card-text ps-3"></br>{{user.username}} </br>@{{user.get_full_name}}</p></a>
+            </div>
+           {% for article in articles %}
+            <div class="card m-3">   
+                <div class="card-header">
+                    <div class='d-flex flex-row '>
+                        <div class="text-center border" style="border-radius:50%; !important;">
+                            <img src="{% static "images/logo.png" %}" class="rounded " alt="..." style='height:50px; width:50px; border-radius:50%; !important;'>
+                        </div>
+                        <div class="ps-5">
+                            <p>
+                                <a href="{% url 'profile' user.id %}" class="text-dark ">{{article.author}}</br>{{article.author.get_full_name}}</a>
+                            </p>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="btn-group-vertical ms-auto" role="group" aria-label="Vertical button group">
+                            <div class="btn-group dropstart" role="group">
+                              <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Article Settings
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'update' article.pk %}">Update</a></li>
+                                <li><a class="dropdown-item" href="{% url 'delete' article.pk %}">Delete</a></li>
+                              </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5>
+                        <a href="{% url 'read-article' article.slug %}" class="text-dark">{{article.title}}</a>
+                    </h5>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <div class='d-flex flex-row   justify-content-between'>
+                        <p>
+                            <a href="{% url 'read-article' article.slug %}" class="btn btn-outline-primary ">Read</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'comment' article.slug %}"class="link-underline-secondary"><i class="fa-solid fa-comment"></i>Comment</a>
+                        </p>
+                        <p>{{article.created_at}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+                {% endif %}
+        </div>
+    </row>
+</div>
+
+<!-- Modal -->
+
+
+    
+{% endblock content %}
+
+{% block contentright %}
+
+{% endblock contentright %}

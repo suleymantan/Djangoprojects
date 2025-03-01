@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="col-md-6 border-2 border-end">
+<table class="table">
+  <h4 class='text-center'>Followers</h4>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for following in followings %}
+    <tr>
+      
+      <td><a href="{% url 'profile' following.following.id %}">{{following.following.username}}</a></td>
+      <td><a href="{% url 'send-follow' user.pk %}" type='button' class="btn btn-secondary text-center">Block</a></td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+<div class="col-md-6 border-2 border-start border-end">
+  <table class="table">
+    <h4 class='text-center'>Followings</h4>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for follow in follows %}
+      <tr>
+        <td><a href="{% url 'profile' follow.follower.id %}">{{follow.follower.get_full_name}}</a></td>
+        <td><a href="{% url 'send-follow' user.pk %}" type='button' class="btn btn-secondary text-center">Block</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+{% endblock content %}
+
+{% block contentright %}
+
+<div class="col-md-12">
+  <div>
+  <form method ='get'>
+  {{ form}}
+  </br>
+  <button type='submit'>Search</button>
+  </form>
+
+  {% if results %}
+  <h2> Result Search</h2>
+  <ul>
+    {% for result in results %}
+    <li>{{user.get_full_name }} ({{user.username }})</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+  <table class="table">
+    <h4 class='text-center'>Follow Requests</h4>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for follow_request in follow_requests %}
+      <tr>
+        
+        <td><a href="">{{follow_request.follower.username}}</a></td>
+        <td><a href="{% url 'approved-follow' follow_request.pk %}" type="button" class="btn btn-outline-primary">Accept</a></td>
+        <td><a href="{% url 'rejete-follow' follow_request.pk %}" type="button" class="btn btn-outline-danger">Rejete</a></td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+{% endblock contentright %}

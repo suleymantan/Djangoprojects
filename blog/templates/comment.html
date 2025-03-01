@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if article_comment %}
+
+<div class="container-fluid border">
+    <row>
+        <div class="col-md-12 p-3">
+            <div class="card mb-3">
+                <div class="card-header d-flex flex-row">
+                    <div class="text-center border" style="border-radius:50%; !important;">
+                        <img src="{% static "images/logo.png" %}" class="rounded " alt="..." style='height:50px; width:50px; border-radius:50%; !important;'>
+                    </div>
+                    <p class="card-text ps-3">{{article_comment.author.get_full_name}}</br>@{{article_read.author}}</p>
+                </div>
+                {% if article_read.image %}
+                <img src="{{article_read.image.url }}" class="card-img-top" alt="...">
+            
+                <div class="card-body">
+                    <h5 class="card-title">{{article_comment.title}}</h5>
+                    <p class="card-text">{{article_comment.content}}</p>
+                </div>
+                <div class="card-footer text-body-secondary d-flex flex-row">
+                
+                    <p class="card-text ps-5"><i class="fa-solid fa-comment"></i>Comment</p>
+                    <p class="card-text ps-5"><small class="text-body-secondary">{{article_comment.created_at}} </small></p>
+                </div>
+                {% else %}
+                <div class="card-body">
+                    <h5 class="card-title">{{article_comment.title}}</h5>
+                    <p class="card-text">{{article_comment.content}}</p>
+                </div>
+                <div class="card-footer text-body-secondary d-flex flex-row  ">
+                    <a href="{% url 'comment' article_comment.slug %}" class="link-underline-secondary"><i class="fa-solid fa-comment"></i>Comment</a>
+                    <p class="card-text ps-5"><small class="text-body-secondary">{{article_comment.created_at}} </small></p>
+                </div>
+                {% endif%}
+            </div>
+        </div>
+        {% for comment in comments %}
+        <div class="card">
+            <div class="card-header d-flex flex-row">
+                <div class="text-center border" style="border-radius:50%; !important;">
+                    <img src="{% static "images/logo.png" %}" class="rounded " alt="..." style='height:50px; width:50px; border-radius:50%; !important;'>
+                </div>
+               <a href=""> <p class="card-text ps-3">{{comment.article.author.get_full_name}}</br>@{{comment.article.author}}</p></a>
+                
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{comment}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <row>
+            <div class="col-md-12">
+        <form method='POST' class="p-3">
+            {% csrf_token %}
+            {{form}}
+        </br>
+        <input type="submit" value="Comment" class=''>
+        </form>
+    </div>
+    </row>
+</br>
+</br>
+</div>
+
+
+<!-- Modal -->
+
+
+    {%endif %}
+{% endblock content %}
+
+{% block contentright %}
+
+{% endblock contentright %}

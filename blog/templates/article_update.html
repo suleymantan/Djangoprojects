@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container ">
+    <row class=''>
+    </br>
+      <div class='col-md-6 offset-md-3 p-3 border'>
+      </br>
+      <h1 class="">Article</h1>
+      
+      <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+     
+       {{form.as_p}}   
+
+      
+      </br>
+      <input type="submit" value="Create" class=' btn btn-info col-md-6 offset-md-3'>
+      
+    </form>
+  </div>
+  </row>
+  </div>
+
+{% endblock content %}
+
+{% block contentright %}
+
+{% endblock contentright %}
